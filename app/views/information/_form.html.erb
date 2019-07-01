@@ -1,0 +1,17 @@
+<% if flash[:errors]  %>
+     <% flash[:errors].each do |e| %>
+         <p> <%= e %> </p>
+     <% end %>    
+<% end %>
+
+
+
+<%= form_for(@info) do |f| %> 
+   <%= f.label :MovieNumber %>
+   <%= f.text_field :movieno %> <br/>
+   <%= f.label :Comment %>
+   <%= f.text_field :comment %> <br/>
+   <%= f.label :Rating %>  
+   <%= f.text_field :rating %> <br/>
+   <%= f.submit %>
+<% end %>

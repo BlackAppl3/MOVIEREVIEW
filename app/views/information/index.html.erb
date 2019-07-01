@@ -1,0 +1,57 @@
+<div class = "demo">
+   <%= link_to('Log out', '/log_out') %>
+</div>     
+
+<br/>
+<br/>
+<marquee> Welcome to comment movie online. Your comments are highly appreciated </marquee>
+
+<% if @info.length != 0 %> 
+  <p> Your recent comments </p>
+   <table border = 1>
+      <thead>
+         <tr>
+             <td> Movie Name </td>
+             <td> Comment </td>
+             <td> Rating </td>
+             <td> Edit </td>
+             <td> Delete </td>
+         </tr> 
+      </thead>
+   
+      <tbody>
+           <% @info.each do |val| %>
+              <tr>
+                 <td> <%=  
+                          if (val.movieno == 1)  
+                             "ABC"
+                          elsif (val.movieno == 2) 
+                             "CDF"
+                          elsif (val.movieno == 3) 
+                             "XYZ" 
+                          end  
+                       %> 
+                 </td>
+                 <td> <%= val.comment %> </td>
+                 <td> <%= val.rating %> </td>
+                 <td> <%= link_to('click me', {
+                     "controller": "information",
+                     "action": "edit",
+                     "id": val.id
+                 }) %>
+                 <td>
+                  <%= link_to('click me', {
+                     "controller": "information",
+                     "action": "destroy",
+                     "id": val.id
+                 }) %> 
+                 </td>
+              </tr>  
+              <% end %> 
+      </tbody>
+   </table>
+<% else %>
+    <p> You don't have any comments </p>
+<% end %>
+
+<%= link_to('Add your comments', new_information_path) %>    

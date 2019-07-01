@@ -1,0 +1,6 @@
+
+<% if @rating == 0 %>
+    <p> No ratings for this movie </p>
+<% else %>
+    <p> THIS MOVIE GOT <%= pluralize(@result, 'rating') %> </p>
+<% end %>        

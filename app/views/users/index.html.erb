@@ -1,0 +1,54 @@
+<html>
+
+<p> Login and Registeration </p>
+
+
+<script type="text/javascript">
+//     (function(){
+//         if( window.localStorage )
+//          {
+//           if( !localStorage.getItem('firstLoad') )
+//            {
+//                localStorage['firstLoad'] = true;
+//                window.location.reload();
+//             }  
+//             else
+//                localStorage.removeItem('firstLoad');
+//          }
+// })();
+</script>
+
+<body>
+   <% if flash[:errors] %>
+       <% flash[:errors].each do |e|  %>
+           <p><%= e %></p>
+       <% end %>
+   <% end %>
+
+  <p> REGISTERATION FORM </p>
+
+
+<div class = "container">
+   <%= form_for @user do |f| %>
+       <%= f.text_field :name %> <br/>
+       <%= f.email_field :email %> <br/>
+       <%= f.password_field :password %> <br/>
+       <%= f.submit %>
+   <% end %>
+
+</div>   
+
+<br/>
+
+    <p> LOGIN FORM </p>
+
+    <%= form_tag sessions_path do %>
+       <%= email_field_tag :email %> <br/>
+       <%= password_field_tag :password %> <br/>  
+       <%= submit_tag "Sign In" %>
+    <% end %>
+
+
+  </body>
+
+</html>

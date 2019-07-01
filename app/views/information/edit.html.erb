@@ -1,0 +1,16 @@
+<p> Edit information </p>
+
+Movie Name <%=  if (@info.movieno == 1)  
+                        "ABC"
+                    elsif (@info.movieno == 2) 
+                        "CDF"
+                    elsif (@info.movieno == 3) 
+                        "XYZ" 
+                     end 
+                %>
+<br/>
+<%= form_for(@info) do |f| %>
+    Comment <%= f.text_field :comment %> <br/>
+    Rating <%= f.text_field :rating %> <br/>
+    <%= f.submit %>            
+<% end %>
