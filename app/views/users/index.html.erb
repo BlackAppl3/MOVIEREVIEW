@@ -48,6 +48,11 @@
        <%= submit_tag "Sign In" %>
     <% end %>
 
+<br/>
+    <marquee behavior = "scroll" direction = "left" onmouseover = "this.stop();" onmouseout = "this.start();" > <%= link_to("Contact Root (7 - RWX)", {
+        "controller": "contacts",
+        "action": "new"
+    }) %> </marquee>
 
   </body>
 

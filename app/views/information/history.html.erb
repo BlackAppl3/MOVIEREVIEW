@@ -1,0 +1,25 @@
+<% if @total == 0 %>
+      <p> "Nothing to Show. This user may not been banned or doesn't be a user"  </p>
+    <% else 
+      %>
+       <table>
+           <th>
+              <tr>
+                 <td> Movie Name </td>
+                 <td> Comment </td>
+                 <td> Rating </td>
+              </tr>
+           </th>
+           <tbody>
+              <% @obj.each do |f| %>
+                 <tr>
+                    <td> <%= f.moviename %> </td>
+                    <td> <%= f.comment %> </td>
+                    <td> <%= f.rating %> </td>
+                 </tr> 
+              <% end %>
+           </tbody>
+       </table>
+      <%
+    end  
+%>
