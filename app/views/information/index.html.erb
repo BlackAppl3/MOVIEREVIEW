@@ -1,4 +1,15 @@
+<% content_for(:title, "Hello " + @name) %>
+
+<p> Hello <%= @name %> </p>
+
 <div class = "demo">
+   You have : <%= 
+   if @warning_count == nil 
+       0
+   else
+       @warning_count 
+    end
+    %> warning count
    <%= link_to('Log out', '/log_out') %>
 </div>     
 
@@ -23,13 +34,7 @@
            <% @info.each do |val| %>
               <tr>
                  <td> <%=  
-                          if (val.movieno == 1)  
-                             "ABC"
-                          elsif (val.movieno == 2) 
-                             "CDF"
-                          elsif (val.movieno == 3) 
-                             "XYZ" 
-                          end  
+                          Movieinfo.find(val.movieno).moviename  
                        %> 
                  </td>
                  <td> <%= val.comment %> </td>

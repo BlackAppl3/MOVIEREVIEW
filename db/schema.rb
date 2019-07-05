@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_01_051203) do
+ActiveRecord::Schema.define(version: 2019_07_04_033241) do
+
+  create_table "ban_infos", force: :cascade do |t|
+    t.string "moviename"
+    t.string "comment"
+    t.integer "rating"
+    t.integer "users_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["users_id"], name: "index_ban_infos_on_users_id"
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.string "email"
+    t.string "comment"
+    t.string "pending_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "information", force: :cascade do |t|
     t.integer "movieno"
@@ -27,12 +45,22 @@ ActiveRecord::Schema.define(version: 2019_07_01_051203) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "queries", force: :cascade do |t|
+    t.string "email"
+    t.string "comment"
+    t.string "pending_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "ban"
+    t.integer "warning_count"
   end
 
 end

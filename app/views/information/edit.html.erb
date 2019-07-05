@@ -1,13 +1,6 @@
 <p> Edit information </p>
 
-Movie Name <%=  if (@info.movieno == 1)  
-                        "ABC"
-                    elsif (@info.movieno == 2) 
-                        "CDF"
-                    elsif (@info.movieno == 3) 
-                        "XYZ" 
-                     end 
-                %>
+<p> Movie Name: <%= Movieinfo.find(@info.movieno).moviename %> </p>
 <br/>
 <%= form_for(@info) do |f| %>
     Comment <%= f.text_field :comment %> <br/>

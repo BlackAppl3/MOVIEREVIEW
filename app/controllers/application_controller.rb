@@ -22,4 +22,11 @@ private
         redirect_to root_path
       end
     end
+
+   def root_login
+      unless session[:email] == "root@gmail.com"
+         flash[:errors] = ["You don't have permission to enter Root :)"]
+         redirect_to root_path
+      end
+  end 
 end

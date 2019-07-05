@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     end
 
     def create
-        user = User.new(user_params) #user is the model name
+        user = User.new(user_params)
         if user.save
            session[:email] = user.email
         #    flash[:errors] = ["Account successfully created"]
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 
 private
     def user_params
-        params.require(:user).permit(:name, :email, :password)
+        params.require(:user).permit(:name, :email, :password).merge(ban: false)
     end
 
 end

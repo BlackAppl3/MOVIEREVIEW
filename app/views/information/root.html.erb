@@ -1,23 +1,18 @@
-<p> Hello Root(777) </p>
+<% content_for(:title, "Hey Root") %>
+
+<p> Hello Root (7 - RWX) </p>
 
 <div class = "demo">
-   <%=link_to("Log out", "/log_out") %>
-</div>   
+   <%=link_to("Requests", information_show_requests_path ) %>
+   (<%= @total %>)
+   <%=link_to("Log out", "/log_out") %> 
+</div> 
 
-   <%= link_to("ABC MOVIE RATING INFORMATION:", {
+<% @movieinfo.each do |val| %>
+    <%= link_to(val.moviename + " Movie Review", {
        "controller": "information",
        "action": "movie_info",
-       "id": 1
+       "id": val.id
     }) %> <br/>
 
-    <%= link_to("DEF MOVIE RATING INFORMATION:", {
-       "controller": "information",
-       "action": "movie_info",
-       "id": 2
-    }) %> <br/>
-
-    <%= link_to("XYZ MOVIE RATING INFORMATION:", {
-       "controller": "information",
-       "action": "movie_info",
-       "id": 3
-    }) %> <br/>
+<% end %>

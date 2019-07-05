@@ -1,0 +1,40 @@
+<% content_for(:title, "Hey Root") %>
+
+<table>
+    <th>
+        <tr>
+            <td> Email </td>
+            <td> Comment </td>
+            <td> Action - UnBan </td>
+            <td> Status information </td>
+            <td> User History </td>
+        </tr>
+    </th>
+
+    <tbody>
+         <% @queries.each  do |f| %>
+              <tr>
+                  <td> <%= f.email %> </td>
+                  <td> <%= f.comment %> </td>
+                  <td> <%= link_to("UnBan", {
+                      "controller": "information",
+                      "action": "unban_user",
+                      "email": f.email
+                  }) %> </td>
+                  <td> <%= if User.find_by(email: f.email) && User.find_by(email: f.email).ban == true
+                               "This user has been banned"
+                            elsif User.find_by(email: f.email)
+                               "Available"
+                            else
+                               "Not Available"   
+                            end 
+                        %> </td>
+                   <td> <%= link_to("History", {
+                       "controller": "information",
+                       "action": "history",
+                       "email": f.email 
+                   }) %> </td>     
+              </tr>
+         <% end %>
+    </tbody>
+</table>   

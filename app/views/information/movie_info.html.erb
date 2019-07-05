@@ -1,6 +1,75 @@
+<% content_for(:title, "Hey Root") %>
 
 <% if @rating == 0 %>
     <p> No ratings for this movie </p>
 <% else %>
     <p> THIS MOVIE GOT <%= pluralize(@result, 'rating') %> </p>
 <% end %>        
+
+<marquee> All Reviews. Hey root you can also warn and ban the users who does bad comment  :) </marquee>
+
+<%= link_to("Highest rating first", {
+    "controller": "information",
+    "action": "movie_info",
+    "id": params[:id],
+    "order": "high"
+}) %> | <%= link_to("Lowest rating first", {
+    "controller": "information",
+    "action": "movie_info",
+    "id": params[:id],
+    "order": "low"
+}) %>
+
+
+
+<table>
+   <th>
+      <tr>
+         <td> Comment </td>
+         <td> Rating </td>
+         <td> Ban the user </td>
+         <td> Warn the user </td>
+         <td> Warning Count </td>
+      </tr>
+   </th>
+   <tbody>
+     <% @res.each do |f| %>
+         <tr>
+            <td> <%= f.comment  %> </td>
+            <td> <%= f.rating %> </td>
+            <td> <%= 
+                temp = User.find_by(email: f.email) 
+                if  temp && temp.ban
+                    "You have already banned the user"
+                else
+                    link_to('Ban the wrong one', {
+                         "controller": "information",
+                         "action": "ban_user",
+                         "id": "1",
+                         "email": f.email,
+                         "info_id": f.id
+                    })     
+                end %> </td>
+            <td> <%= 
+                temp = User.find_by(email: f.email) 
+                if  temp && temp.ban
+                    "You have already banned the user"
+                else
+                 link_to('Warn the user', {
+                      "controller": "information",
+                      "action": "warn_user",
+                      "email": f.email
+                 }) 
+                end 
+                %>
+            </td>
+            <td> <%= if User.find_by(email: f.email) && User.find_by(email: f.email).warning_count != nil
+                         User.find_by(email: f.email).warning_count 
+                      else
+                         0   
+                      end   
+                 %> </td>
+         </tr>
+     <% end %>
+   </tbody>  
+</table>     

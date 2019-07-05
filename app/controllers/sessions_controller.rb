@@ -2,7 +2,12 @@ class SessionsController < ApplicationController
     def create
         # fail
         user = User.find_by(email: params[:email])
-        if user && user.password == params[:password] && user.password != "root"
+        
+        if user && user.password == params[:password] && user.ban == true
+            #fail
+            flash[:errors] = ["You have been banned. Because you violated the comment policy. Contact Admin"]
+            redirect_to root_path
+        elsif user && user.password == params[:password] && user.password != "root"
             session[:email] = user.email 
             redirect_to information_index_path
         elsif user && user.password == params[:password] && params[:email] == "root@gmail.com"
