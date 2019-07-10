@@ -2,8 +2,21 @@
 
 <p> Movie Name: <%= Movieinfo.find(@info.movieno).moviename %> </p>
 <br/>
-<%= form_for(@info) do |f| %>
-    Comment <%= f.text_field :comment %> <br/>
-    Rating <%= f.text_field :rating %> <br/>
-    <%= f.submit %>            
+<%= form_for @info, :html => {:class => "form-horizontal center"} do |f| %>
+
+    <div class="form-group">
+        <%= f.label :Comment, class: "col-md-5 control-label" %>
+            <div class="col-md-3">
+               <%= f.text_field :comment,  class: "form-control" %>   
+            </div>   
+     </div>
+
+    <div class="form-group">
+        <%= f.label :Rating, class: "col-md-5 control-label" %>
+            <div class="col-md-3">
+               <%= f.text_field :rating,  class: "form-control" %>   
+            </div>   
+     </div>
+
+    <center> <%= f.submit class: "btn btn-success btn-sm" %> </center>           
 <% end %>

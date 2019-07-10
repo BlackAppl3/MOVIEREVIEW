@@ -18,7 +18,7 @@ class InformationController < ApplicationController
         @new_arr = {}
         count = 1
         @temp.each do |val|
-            @new_arr.store(count, val.moviename)
+            @new_arr.store(val.id, val.moviename)
             count += 1
         end
     end

@@ -8,33 +8,33 @@
 
 <marquee> All Reviews. Hey root you can also warn and ban the users who does bad comment  :) </marquee>
 
-<%= link_to("Highest rating first", {
+<center> <%= link_to("Highest rating first", {
     "controller": "information",
     "action": "movie_info",
     "id": params[:id],
     "order": "high"
-}) %> | <%= link_to("Lowest rating first", {
+}, class: "btn btn-success") %>  <%= link_to("Lowest rating first", {
     "controller": "information",
     "action": "movie_info",
     "id": params[:id],
     "order": "low"
-}) %>
+}, class: "btn btn-success") %> </center>
 
 
 
-<table>
-   <th>
+<table class = "table table-striped" >
+   <thead>
       <tr>
-         <td> Comment </td>
-         <td> Rating </td>
-         <td> Ban the user </td>
-         <td> Warn the user </td>
-         <td> Warning Count </td>
+         <th scope="col" > Comment </td>
+         <th scope="col" > Rating </td>
+         <th scope="col" > Ban the user </td>
+         <th scope="col" > Warn the user </td>
+         <th scope="col" > Warning Count </td>
       </tr>
-   </th>
+   </thead>
    <tbody>
      <% @res.each do |f| %>
-         <tr>
+         <tr scope = "row" >
             <td> <%= f.comment  %> </td>
             <td> <%= f.rating %> </td>
             <td> <%= 

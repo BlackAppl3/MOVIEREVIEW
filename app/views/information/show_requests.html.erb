@@ -1,26 +1,32 @@
 <% content_for(:title, "Hey Root") %>
 
-<table>
-    <th>
-        <tr>
-            <td> Email </td>
-            <td> Comment </td>
-            <td> Action - UnBan </td>
-            <td> Status information </td>
-            <td> User History </td>
+<table class = "table table-striped" >
+    <thead>
+        <tr scope="col" >
+            <th> Email </th>
+            <th> Comment </th>
+            <th> Action - UnBan </th>
+            <th> Status information </th>
+            <th> User History </th>
         </tr>
-    </th>
+    </thead>
 
     <tbody>
          <% @queries.each  do |f| %>
-              <tr>
+              <tr scope = "row" >
                   <td> <%= f.email %> </td>
                   <td> <%= f.comment %> </td>
-                  <td> <%= link_to("UnBan", {
-                      "controller": "information",
-                      "action": "unban_user",
-                      "email": f.email
-                  }) %> </td>
+                  <td> <%= 
+                    if User.find_by(email: f.email) && User.find_by(email: f.email).ban == false
+                       "User is healthy" 
+                    else   
+                        link_to("UnBan", {
+                            "controller": "information",
+                            "action": "unban_user",
+                            "email": f.email
+                  })
+                    end
+                    %> </td>
                   <td> <%= if User.find_by(email: f.email) && User.find_by(email: f.email).ban == true
                                "This user has been banned"
                             elsif User.find_by(email: f.email)

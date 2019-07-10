@@ -10,7 +10,7 @@
        @warning_count 
     end
     %> warning count
-   <%= link_to('Log out', '/log_out') %>
+   <%= link_to('Log out', '/log_out', class: "btn btn-danger") %>
 </div>     
 
 <br/>
@@ -19,20 +19,20 @@
 
 <% if @info.length != 0 %> 
   <p> Your recent comments </p>
-   <table border = 1>
+   <table class = "table table-striped" >
       <thead>
          <tr>
-             <td> Movie Name </td>
-             <td> Comment </td>
-             <td> Rating </td>
-             <td> Edit </td>
-             <td> Delete </td>
+             <th scope="col" > Movie Name </td>
+             <th scope="col" > Comment </td>
+             <th scope="col" > Rating </td>
+             <th scope="col" > Edit </td>
+             <th scope="col" > Delete </td>
          </tr> 
       </thead>
    
       <tbody>
            <% @info.each do |val| %>
-              <tr>
+              <tr scope = "row" >
                  <td> <%=  
                           Movieinfo.find(val.movieno).moviename  
                        %> 
@@ -59,4 +59,4 @@
     <p> You don't have any comments </p>
 <% end %>
 
-<%= link_to('Add your comments', new_information_path) %>    
+<center> <%= link_to('Add your comments', new_information_path, class: "btn btn-primary btn-sm") %>  </center>

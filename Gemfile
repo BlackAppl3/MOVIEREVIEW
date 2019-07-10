@@ -62,3 +62,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'hirb'
 gem 'rspec-rails'
+gem 'bootstrap-sass', '~> 3.3.5'
+gem 'sass-rails', '~> 5.0'

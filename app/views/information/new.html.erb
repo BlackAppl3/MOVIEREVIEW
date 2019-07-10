@@ -6,13 +6,29 @@
 
 
 
-<%= form_for(@info) do |f| %> 
-   <%= f.label :MovieNumber %>
-   <%= select_tag "movieno", options_for_select(@new_arr.collect{|u| [u[1], u[0]]}) %> <br/>
-   <%= f.label :Comment %>
-   <%= f.text_field :comment %> <br/>
-   <%= f.label :Rating %>  
-   <%= f.radio_button :rating, 1 %> 1 <%= f.radio_button :rating, 2 %> 2  <%= f.radio_button :rating, 3 %> 3 <%= f.radio_button :rating, 4 %> 4 <%= f.radio_button :rating, 5 %> 5
-   <br/> 
-   <%= f.submit %>
+<%= form_for @info, :html => {:class => "form-horizontal center"} do |f| %> 
+     <div class="form-group">
+        <%= f.label :MovieNumber, class: "col-md-5 control-label" %>
+            <div class="col-md-3">
+               <%= select_tag "movieno", options_for_select(@new_arr.collect{|u| [u[1], u[0]]}),  class: "form-control" %> 
+            </div>   
+     </div>
+
+     <div class="form-group">
+        <%= f.label :Comment, class: "col-md-5 control-label" %>
+            <div class="col-md-3">
+               <%= f.text_field :comment, class: "form-control" %> 
+            </div>
+     </div>
+
+     <div class="form-group">
+        <%= f.label :Rating, class: "col-md-5 control-label" %>  
+            <div class="col-md-3">
+                <%= f.radio_button :rating, 1 %> 1 <%= f.radio_button :rating, 2 %> 2  <%= f.radio_button :rating, 3 %> 3 <%= f.radio_button :rating, 4 %> 4 <%= f.radio_button :rating, 5 %> 5
+            </div>
+     </div>
+
+    
+        <center> <%= f.submit class: "btn btn-success btn-sm" %> </center>
+    
 <% end %>

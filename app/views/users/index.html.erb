@@ -1,8 +1,5 @@
 <html>
 
-<p> Login and Registeration </p>
-
-
 <script type="text/javascript">
 //     (function(){
 //         if( window.localStorage )
@@ -20,32 +17,78 @@
 
 <body>
    <% if flash[:errors] %>
+    <div class = "col-xs-10 col-xs-offset-1">
+      <div class = "alert alert-danger">
+        <a href = "#" class = "close" data-dismiss = "alert"> x </a>
+            There was something wrong with the login information
+      </div>
+    </div>        
        <% flash[:errors].each do |e|  %>
-           <p><%= e %></p>
+          <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+              <div class="panel panel-danger">
+                   <div class="panel-heading">
+                     <h2 class="panel-title">
+                        <%= e %>
+                      </h2>
+                    </div>
+              </div>
+            </div>            
+          </div>
        <% end %>
    <% end %>
 
   <p> REGISTERATION FORM </p>
 
 
-<div class = "container">
-   <%= form_for @user do |f| %>
-       <%= f.text_field :name %> <br/>
-       <%= f.email_field :email %> <br/>
-       <%= f.password_field :password %> <br/>
-       <%= f.submit %>
+   <%= form_for @user, :html => {:class => "form-horizontal center"} do |f| %>
+        
+        <div class="form-group">
+            <%= f.label :UserName, class: "col-md-5 control-label" %>
+               <div class="col-md-3">
+                  <%= f.text_field :name,  class: "form-control" %>   
+                </div>   
+         </div>
+
+        <div class="form-group">
+            <%= f.label :Email, class: "col-md-5 control-label" %>
+               <div class="col-md-3">
+                  <%= f.email_field :email,  class: "form-control" %>   
+                </div>   
+        </div>
+
+        <div class="form-group">
+            <%= f.label :Password, class: "col-md-5 control-label" %>
+               <div class="col-md-3">
+                  <%= f.password_field :password,  class: "form-control" %>   
+                </div>   
+         </div>
+    
+       <center> <%= f.submit   class: "btn btn-success btn-sm" %> </center>
    <% end %>
 
-</div>   
-
-<br/>
+   <br/>
 
     <p> LOGIN FORM </p>
 
-    <%= form_tag sessions_path do %>
-       <%= email_field_tag :email %> <br/>
-       <%= password_field_tag :password %> <br/>  
-       <%= submit_tag "Sign In" %>
+    <%= form_tag sessions_path, class: "form-horizontal center" do %>
+        
+        <div class="form-group">
+            <label for="UserName" class =  "col-md-5 control-label"  >User Name</label>
+                <div class="col-md-3">  
+                  <%= email_field_tag :email,  params[:email], class: 'form-control' %> 
+                </div>   
+        </div>
+
+        <div class="form-group">
+            <label for="Password" class =  "col-md-5 control-label"  >Password</label>
+                <div class="col-md-3">  
+                  <%= password_field_tag :password,  nil, class: 'form-control' %>
+                </div>   
+        </div>
+
+       <center> <%= submit_tag "Sign In", class: "btn btn-success btn-sm" %> </center>
+       
     <% end %>
 
 <br/>
