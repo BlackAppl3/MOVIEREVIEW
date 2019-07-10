@@ -70,6 +70,7 @@ class InformationController < ApplicationController
         @info = Information.all
         @total = Contact.all.count
         @movieinfo = Movieinfo.all
+        @obj1 = Movieinfo.new
     end
 
     def movie_info
@@ -155,6 +156,17 @@ class InformationController < ApplicationController
         else
             
         end
+    end
+
+    def addmovie
+        dup_val = Movieinfo.all
+        dup_val.each do |val|
+            if val.moviename == params[:movieinfo][:moviename]
+                redirect_to "/information/root" and return
+            end    
+        end
+        obj = Movieinfo.create(moviename: params[:movieinfo][:moviename])
+        redirect_to "/information/root"
     end
 
 private    

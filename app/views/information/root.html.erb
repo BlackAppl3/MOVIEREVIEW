@@ -3,10 +3,26 @@
 <p> Hello Root (7 - RWX) </p>
 
 <div class = "demo">
+   <%= link_to("Add new MovieName", {
+         "controller": "information",
+         "action": "root",
+         "show_form": true
+   }) unless params.has_key? "show_form"
+   
+    %>
+
    <%=link_to("Requests", information_show_requests_path ) %>
    (<%= @total %>)
    <%=link_to("Log out", "/log_out") %> 
 </div> 
+
+<% if params[:show_form] && params[:show_form] == "true" %>
+   <%= form_for @obj1, :url => {:controller => "information", :action => "addmovie"} do |f|  %>
+       <% f.label :MovieName %>
+       <%= f.text_field :moviename %> <br/>
+       <%= f.submit %> 
+   <% end %>
+<% end %>
 
 <% @movieinfo.each do |val| %>
     <%= link_to(val.moviename + " Movie Review", {

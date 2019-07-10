@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'information/unban_user/:email' => "information#unban_user", as: "query"
   get 'information/warning/:id' => "information#warning"
   get 'information/history/:email' => "information#history"
+  post 'information/addmovie' => "information#addmovie"
   resources :information
   resources :contacts
   resources :users, only: [:index, :create]

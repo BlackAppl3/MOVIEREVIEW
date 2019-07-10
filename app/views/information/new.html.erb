@@ -12,6 +12,7 @@
    <%= f.label :Comment %>
    <%= f.text_field :comment %> <br/>
    <%= f.label :Rating %>  
-   <%= f.text_field :rating %> <br/>
+   <%= f.radio_button :rating, 1 %> 1 <%= f.radio_button :rating, 2 %> 2  <%= f.radio_button :rating, 3 %> 3 <%= f.radio_button :rating, 4 %> 4 <%= f.radio_button :rating, 5 %> 5
+   <br/> 
    <%= f.submit %>
 <% end %>
