@@ -4,21 +4,45 @@
      <% end %>    
 <% end %>
 
-<%= form_for @info, :html => {:class => "form-horizontal center"} do |f| %> 
+<br/>
 
-  <div class="form-group">
-        <%= f.label :EmailID, class: "col-md-5 control-label" %>
-            <div class="col-md-3">
-                <%= f.email_field :email,  class: "form-control" %>   
-            </div>   
-  </div>
+<center> <%= link_to("Check Root Response", {"controller": "contacts", "action": "new", "id": 1}, class: "btn btn-success") %> <%= link_to("Contact Admin", {"controller": "contacts", "action": "new", "id": 2}, class: "btn btn-success") %> </center>
+<br/>
+
+<% if params[:id] == "2" %>
+
+   <%= form_for @info, :html => {:class => "form-horizontal center"} do |f| %> 
+
+     <div class="form-group">
+           <%= f.label :EmailID, class: "col-md-5 control-label" %>
+               <div class="col-md-3">
+                   <%= f.email_field :email,  class: "form-control" %>   
+               </div>   
+     </div>
    
-  <div class="form-group">
-        <%= f.label :Comment, class: "col-md-5 control-label" %>
-            <div class="col-md-3">
-                <%= f.text_field :comment,  class: "form-control" %>   
-            </div>   
-  </div>
+     <div class="form-group">
+           <%= f.label :Comment, class: "col-md-5 control-label" %>
+               <div class="col-md-3">
+                   <%= f.text_field :comment,  class: "form-control" %>   
+               </div>   
+     </div>
     
-   <center> <%= f.submit class: "btn btn-success" %> </center>
+      <center> <%= f.submit class: "btn btn-success"  %> </center>
+   <% end %>
+
+<%end%>
+
+
+<% if params[:id] == "1" %>
+   <%= form_for(@user_info, :html => {:class => "form-horizontal center"}, :url => {:controller => "contacts", :action => "request_result"}) do |f| %>
+        <div class="form-group">
+           <%= f.label :EmailID, class: "col-md-5 control-label" %>
+               <div class="col-md-3">
+                   <%= f.email_field :email,  class: "form-control" %>   
+               </div>   
+        </div>
+
+        <center> <%= f.submit class: "btn btn-success"  %> </center>
+
+   <% end %>
 <% end %>
