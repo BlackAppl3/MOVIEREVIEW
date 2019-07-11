@@ -17,11 +17,20 @@
 
 <br/> <br/>
 
+
+
 <% if params[:show_form] && params[:show_form] == "true" %>
-   <%= form_for @obj1,  :url => {:controller => "information", :action => "addmovie"} do |f|  %>
-       <% f.label :MovieName %>
-       <%= f.text_field :moviename %> <br/>
-       <%= f.submit %> 
+   
+   <%= form_for(@obj1, :html => {:class => "form-horizontal center"}, :url => {:controller => "information", :action => "addmovie"}) do |f|  %>
+
+         <div class="form-group">
+            <%= f.label :MovieName, class: "col-md-5 control-label" %>
+               <div class="col-md-3">
+                  <%= f.text_field :moviename,  class: "form-control" %>   
+                </div>   
+         </div>
+
+      <center>  <%= f.submit class: "btn btn-success" %>  </center>
    <% end %>
 <% end %>
 
@@ -35,13 +44,30 @@
    <tbody>
       <% @movieinfo.each do |val| %>
          <tr scope = "row"> 
+            
             <td> 
                <%= link_to(val.moviename + " Movie Review", {
-                "controller": "information",
-                "action": "movie_info",
-                "id": val.id
+                 "controller": "information",
+                 "action": "movie_info",
+                 "id": val.id
                 }) %>
-            </td>    
+            </td>
+
+            <td>
+               <%= link_to("Delete", {
+                 "controller": "information",
+                 "action": "delete_movie",
+                 "id": val.id
+                }) %>
+            </td>
+
+            <td>
+               <%= form_for(@mov_obj, :url => {:controller => "information", :action => "edit_movie", :id => val.id}) do |f| %> 
+                  <%= f.text_field :moviename %>
+                  <%= f.submit "Update Info" %>
+               <% end %>
+            </td>
+
          </tr>
       <% end %>
    </tbody>

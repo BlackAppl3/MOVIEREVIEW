@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get 'information/warning/:id' => "information#warning"
   get 'information/history/:email' => "information#history"
   post 'information/addmovie' => "information#addmovie"
+  get 'information/delete_movie' => "information#delete_movie"
+  post 'information/edit_movie/:id' => "information#edit_movie"
   resources :information
   resources :contacts
   resources :users, only: [:index, :create]

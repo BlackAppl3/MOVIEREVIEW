@@ -71,6 +71,7 @@ class InformationController < ApplicationController
         @total = Contact.all.count
         @movieinfo = Movieinfo.all
         @obj1 = Movieinfo.new
+        @mov_obj = Movieinfo.new
     end
 
     def movie_info
@@ -165,7 +166,19 @@ class InformationController < ApplicationController
                 redirect_to "/information/root" and return
             end    
         end
-        obj = Movieinfo.create(moviename: params[:movieinfo][:moviename])
+        @obj = Movieinfo.create(moviename: params[:movieinfo][:moviename])
+        redirect_to "/information/root"
+    end
+
+    def delete_movie
+        obj = Movieinfo.find(params[:id])
+        obj.destroy
+        redirect_to "/information/root"
+    end
+
+    def edit_movie
+        obj = Movieinfo.find(params[:id])
+        obj.update(moviename: params[:movieinfo][:moviename])
         redirect_to "/information/root"
     end
 
