@@ -16,6 +16,10 @@
 </script>
 
 <body>
+   
+   
+   <center> <%= image_submit_tag('logo.png') %> </center>
+
    <% if flash[:errors] %>
     <div class = "col-xs-10 col-xs-offset-1">
       <div class = "alert alert-danger">
@@ -38,8 +42,14 @@
        <% end %>
    <% end %>
 
-  <p> REGISTERATION FORM </p>
+  <br/>
 
+
+<center> <%= link_to("SIGNUP", {"controller": "users", "action": "index", "id": 1}, class: "btn btn-success") %> <%= link_to("LOGIN", {"controller": "users", "action": "index", "id": 2}, class: "btn btn-success") %> </center>
+
+<br/>
+
+<% if params[:id] == "1" %>
 
    <%= form_for @user, :html => {:class => "form-horizontal center"} do |f| %>
         
@@ -67,9 +77,9 @@
        <center> <%= f.submit   class: "btn btn-success btn-sm" %> </center>
    <% end %>
 
-   <br/>
+<% end %>
 
-    <p> LOGIN FORM </p>
+<% if params[:id] == "2" %>
 
     <%= form_tag sessions_path, class: "form-horizontal center" do %>
         
@@ -91,6 +101,7 @@
        
     <% end %>
 
+<% end %>
 <br/>
     <marquee behavior = "scroll" direction = "left" onmouseover = "this.stop();" onmouseout = "this.start();" > <%= link_to("Contact Root (7 - RWX)", {
         "controller": "contacts",

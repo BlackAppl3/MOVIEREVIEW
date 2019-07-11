@@ -13,20 +13,24 @@
 
     <tbody>
          <% @queries.each  do |f| %>
+             
               <tr scope = "row" >
                   <td> <%= f.email %> </td>
                   <td> <%= f.comment %> </td>
                   <td> <%= 
                     if User.find_by(email: f.email) && User.find_by(email: f.email).ban == false
                        "User is healthy" 
-                    else   
+                    elsif User.find_by(email: f.email) && User.find_by(email: f.email). ban == true  
                         link_to("UnBan", {
                             "controller": "information",
                             "action": "unban_user",
                             "email": f.email
-                  })
+                    })
+                    else "Not Available"
+
                     end
                     %> </td>
+
                   <td> <%= if User.find_by(email: f.email) && User.find_by(email: f.email).ban == true
                                "This user has been banned"
                             elsif User.find_by(email: f.email)
@@ -35,12 +39,14 @@
                                "Not Available"   
                             end 
                         %> </td>
+
                    <td> <%= link_to("History", {
                        "controller": "information",
                        "action": "history",
                        "email": f.email 
                    }) %> </td>     
               </tr>
+
          <% end %>
     </tbody>
 </table>   
