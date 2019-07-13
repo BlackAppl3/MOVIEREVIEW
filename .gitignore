@@ -29,3 +29,10 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+
+# Ignore local environment variables
+/config/local-env.yml
+
+# Recaptchca key
+/config/initializers/recaptcha.rb

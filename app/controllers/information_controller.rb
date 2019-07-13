@@ -24,9 +24,10 @@ class InformationController < ApplicationController
     end
 
     def create
+
         @containval = Information.find_by(email: session[:email], movieno: params[:movieno])
 
-        if @containval
+        if @containval && verify_recaptcha
             #fail
             @containval.update(comment: params[:information][:comment])
             @containval.update(rating: params[:information][:rating])
