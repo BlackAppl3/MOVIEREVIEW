@@ -33,7 +33,7 @@
       <tbody>
            <% @info.each do |val| %>
               <tr scope = "row" >
-                 <td> <%=  
+                 <td> <%= obj =  Movieinfo.find(val.movieno)
                           Movieinfo.find(val.movieno).moviename  
                        %> 
                  </td>
@@ -50,6 +50,11 @@
                      "action": "destroy",
                      "id": val.id
                  }) %> 
+                 </td>
+                 <td>
+                     <% if obj.image.attached? %>
+                        <%= image_tag(obj.image, :size => '50x18', :crop => :fill)  %>
+                     <% end %>   
                  </td>
               </tr>  
               <% end %> 

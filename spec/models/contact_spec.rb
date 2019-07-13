@@ -13,6 +13,16 @@ RSpec.describe Contact, type: :model do
       text.comment = nil 
       expect(text.save).to eq(false)
     end
+
+    it "ensures the presence of both email and comment" do  
+       text.email = nil 
+       text.comment = nil 
+       expect(text.save).to eq(false)
+    end
+
+    it "expected to save when we have both email and comment" do   
+       expect(text.save).to eq(true)
+    end
     
   end
   

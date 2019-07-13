@@ -11,6 +11,10 @@ RSpec.describe Movieinfo, type: :model do
          expect(text.save).to eq(false)  
     end
 
+    it "expected to save when moviename is present" do    
+         expect(text.save).to eq(true)
+    end
+
     # it "ensures the database count" do
     #   expect(text.all.size).to eq(0)
     # end     

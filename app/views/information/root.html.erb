@@ -27,7 +27,11 @@
             <%= f.label :MovieName, class: "col-md-5 control-label" %>
                <div class="col-md-3">
                   <%= f.text_field :moviename,  class: "form-control" %>   
-                </div>   
+                </div>
+            <%= f.label :image, class: "col-md-5 control-label" %>
+               <div class="col-md-3">
+                  <%= f.file_field :image,  class: "form-control" %>   
+                </div>       
          </div>
 
       <center>  <%= f.submit class: "btn btn-success" %>  </center>
@@ -38,6 +42,9 @@
    <thead>
        <tr>
           <th scope="col" > Movie Name </td>
+          <th scope="col" >  </td>
+          <th scope="col" >  </td>
+          <th scope="col" > Attachment </td>
        </tr>
    </thead>    
 
@@ -66,6 +73,10 @@
                   <%= f.text_field :moviename %>
                   <%= f.submit "Update Info" %>
                <% end %>
+            </td>
+
+            <td>
+               <%= image_tag(val.image, :size => '50x18', :crop => :fill) if val.image.attached? %>
             </td>
 
          </tr>

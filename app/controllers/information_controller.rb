@@ -166,8 +166,14 @@ class InformationController < ApplicationController
                 redirect_to "/information/root" and return
             end    
         end
-        @obj = Movieinfo.create(moviename: params[:movieinfo][:moviename])
-        redirect_to "/information/root"
+        #fail
+        # Movieinfo.create(moviename: params[:movieinfo][:moviename])
+        obj = Movieinfo.new(set_movieinfo_params)
+        if obj.save
+            redirect_to "/information/root"
+        else 
+            render plain: "Sorry"    
+        end    
     end
 
     def delete_movie
@@ -183,6 +189,10 @@ class InformationController < ApplicationController
     end
 
 private    
+    def set_movieinfo_params
+        params.require(:movieinfo).permit(:moviename, :image)
+    end
+
     def information_params
         params.require(:information).permit(:comment, :rating).merge(email: session[:email]).merge(movieno: params[:movieno])
     end
