@@ -83,6 +83,14 @@ class InformationController < ApplicationController
     end
 
     def movie_info
+        # fail
+        if params[:filter] == "true"  and params.has_key?(:rating_val)
+            @res = Information.where(movieno: params[:id], rating: params[:rating_val])
+            return  
+        end
+
+
+        @demoobj = Information.new
         @info = Information.where(movieno: params[:id])
         @res = Information.where(movieno: params[:id])
 

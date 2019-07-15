@@ -1,3 +1,19 @@
+<script>
+    function clickfunction(movieno){
+        var opt = document.getElementById("rating").value
+        var movieno = document.getElementById("hidden-para").innerHTML
+        console.log(movieno)
+        
+        /* const urlParams = new URLSearchParams(window.location.search);
+        # const myParam = urlParams.get("");
+        # console.log(myParam) */
+        
+       window.location.href = "/information/movie_info/"+movieno+"?filter=true&rating_val="+opt+""; 
+
+
+    }
+</script>
+
 <% content_for(:title, "Hey Root") %>
 
 <% if @rating == 0 %>
@@ -18,8 +34,11 @@
     "action": "movie_info",
     "id": params[:id],
     "order": "low"
-}, class: "btn btn-success") %> </center>
+}, class: "btn btn-success") %> 
+     <%= select_tag "rating", options_for_select([["1-STAR", "1"], ["2-STAR", "2"], ["3-STAR", "3"], ["4-STAR", "4"], ["5-STAR", "5"]]), class: "btn btn-success", :onclick => "clickfunction()" %> 
+</center>
 
+<p id = "hidden-para" hidden> <%= params[:id] %> </p>
 
 
 <table class = "table table-striped" >
