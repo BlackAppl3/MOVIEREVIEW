@@ -2,6 +2,7 @@
     function clickfunction(movieno){
         var opt = document.getElementById("rating").value
         var movieno = document.getElementById("hidden-para").innerHTML
+        movieno = movieno.replace(/%20/g, " ");
         console.log(movieno)
         
         /* const urlParams = new URLSearchParams(window.location.search);
@@ -24,18 +25,21 @@
 
 <marquee> All Reviews. Hey root you can also warn and ban the users who does bad comment  :) </marquee>
 
-<center> <%= link_to("Highest rating first", {
-    "controller": "information",
-    "action": "movie_info",
-    "id": params[:id],
-    "order": "high"
-}, class: "btn btn-success") %>  <%= link_to("Lowest rating first", {
-    "controller": "information",
-    "action": "movie_info",
-    "id": params[:id],
-    "order": "low"
-}, class: "btn btn-success") %> 
-     <%= select_tag "rating", options_for_select([["1-STAR", "1"], ["2-STAR", "2"], ["3-STAR", "3"], ["4-STAR", "4"], ["5-STAR", "5"]]), class: "btn btn-success", :onclick => "clickfunction()" %> 
+<center>   <% if params.has_key?(:rating_val) == false %> 
+               <%= link_to("Highest rating first", {
+                   "controller": "information",
+                   "action": "movie_info",
+                   "id": params[:id],
+                   "order": "high"
+                }, class: "btn btn-success") %> 
+                <%= link_to("Lowest rating first", {
+                   "controller": "information",
+                   "action": "movie_info",
+                   "id": params[:id],
+                   "order": "low"
+                }, class: "btn btn-success") %> 
+           <% end %>
+     <%= select_tag "rating", options_for_select(@hash.collect{|u| [u[1], u[0]]}), class: "btn btn-success", :onclick => "clickfunction()" %> 
 </center>
 
 <p id = "hidden-para" hidden> <%= params[:id] %> </p>
@@ -92,3 +96,5 @@
      <% end %>
    </tbody>  
 </table>     
+
+<center> <%= link_to "Back", information_root_path %> </center>

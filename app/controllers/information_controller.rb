@@ -16,10 +16,8 @@ class InformationController < ApplicationController
         @info = Information.new
         @temp = Movieinfo.all
         @new_arr = {}
-        count = 1
         @temp.each do |val|
             @new_arr.store(val.id, val.moviename)
-            count += 1
         end
     end
 
@@ -84,22 +82,23 @@ class InformationController < ApplicationController
 
     def movie_info
         # fail
-        if params[:filter] == "true"  and params.has_key?(:rating_val)
-            @res = Information.where(movieno: params[:id], rating: params[:rating_val])
-            return  
-        end
-
-
         @demoobj = Information.new
         @info = Information.where(movieno: params[:id])
         @res = Information.where(movieno: params[:id])
 
-        if params[:order] && params[:order] == "high"
-            @res =  @res.order({rating: :desc})
-        elsif params[:order] && params[:order] == "low"
-             #fail
-            @res =  @res.order({rating: :asc})
-        end
+        arr = @info.collect(&:rating).sort!.uniq
+
+        # uniq! (bang) returns nil if no changes are made
+
+        @hash = {}
+        
+        if arr   
+            arr.each do |val|
+               @hash.store(val, val.to_s+ "- Rating")
+            end
+        end    
+
+        # byebug
 
         rate = 0 
         users = 0
@@ -115,7 +114,19 @@ class InformationController < ApplicationController
          else
             @result = (rate.to_f)/(users.to_f)
             @result = @result.round(2)
-         end      
+         end 
+
+        if params[:filter] == "true"  and params.has_key?(:rating_val)
+            @res = Information.where(movieno: params[:id], rating: params[:rating_val]) 
+            return  
+        end
+
+        if params[:order] && params[:order] == "high"
+            @res =  @res.order({rating: :desc})
+        elsif params[:order] && params[:order] == "low"
+             #fail
+            @res =  @res.order({rating: :asc})
+        end     
     end
 
     def ban_user
@@ -127,7 +138,7 @@ class InformationController < ApplicationController
             obj.moviename = Movieinfo.find(@dem.movieno).moviename 
             obj.comment = @dem.comment 
             obj.rating = @dem.rating
-            byebug
+            #byebug
             @temp_user.update(ban: true)
             obj.save
         end    
@@ -188,7 +199,7 @@ class InformationController < ApplicationController
         if obj.save
             redirect_to "/information/root"
         else 
-            render plain: "Sorry"    
+            render plain: "Movie Name can't be blank!!!"    
         end    
     end
 
