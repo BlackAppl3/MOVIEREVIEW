@@ -24,6 +24,14 @@ class InformationController < ApplicationController
     end
 
     def create
+        
+        if verify_recaptcha
+            "OK"
+        else     
+             flash[:errors] = ["Recaptcha verification failure"]
+             redirect_to  new_information_path and return 
+        end
+
         @containval = Information.find_by(email: session[:email], movieno: params[:movieno])
 
         if @containval

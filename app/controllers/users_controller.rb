@@ -4,6 +4,14 @@ class UsersController < ApplicationController
     end
 
     def create
+
+        if verify_recaptcha
+            "OK"
+        else     
+             flash[:errors] = ["Recaptcha verification failure"]
+             redirect_to  root_path and return 
+        end
+
         user = User.new(user_params)
         if user.save
            session[:email] = user.email
