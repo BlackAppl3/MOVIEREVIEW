@@ -27,7 +27,8 @@
              <th scope="col" > Rating </td>
              <th scope="col" > Edit </td>
              <th scope="col" > Delete </td>
-             <th scope="col" > Attachment </td>
+             <th scope="col" > Image </td>
+             <th scope="col" > Video </td>
          </tr> 
       </thead>
    
@@ -56,6 +57,11 @@
                      <% if obj.image.attached? %>
                         <%= image_tag(obj.image, :size => '50x18', :crop => :fill)  %>
                      <% end %>   
+                 </td>
+                 <td>
+                     <% if obj.clip.attached? %>
+                        <%= video_tag(url_for(obj.clip), controls: true, width: 50, height: 18) if obj.clip.attached?  %>
+                     <% end %>
                  </td>
               </tr>  
               <% end %> 
