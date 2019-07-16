@@ -32,6 +32,10 @@
                <div class="col-md-3">
                   <%= f.file_field :image,  class: "form-control" %>   
                 </div>       
+            <%= f.label :clip, class: "col-md-5 control-label" %>
+               <div class="col-md-3">
+                  <%= f.file_field :clip,  class: "form-control" %>   
+                </div>        
          </div>
 
       <center>  <%= f.submit class: "btn btn-success" %>  </center>
@@ -44,7 +48,8 @@
           <th scope="col" > Movie Name </td>
           <th scope="col" >  </td>
           <th scope="col" >  </td>
-          <th scope="col" > Attachment </td>
+          <th scope="col" > Image </td>
+          <th scope="col"> Video </td>
        </tr>
    </thead>    
 
@@ -65,7 +70,7 @@
                  "controller": "information",
                  "action": "delete_movie",
                  "id": val.id
-                }) %>
+                },data: { confirm: "Are you sure?" }) %>
             </td>
 
             <td>
@@ -77,6 +82,10 @@
 
             <td>
                <%= image_tag(val.image, :size => '50x18', :crop => :fill) if val.image.attached? %>
+            </td>
+
+            <td>
+               <%= video_tag(url_for(val.clip), controls: true, width: 50, height: 18) if val.clip.attached?  %>   
             </td>
 
          </tr>

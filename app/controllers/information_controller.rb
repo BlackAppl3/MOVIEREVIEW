@@ -86,6 +86,7 @@ class InformationController < ApplicationController
         @info = Information.where(movieno: params[:id])
         @res = Information.where(movieno: params[:id])
 
+        # Information.where(movieno:1).pluck(:rating).uniq.sort
         arr = @info.collect(&:rating).sort!.uniq
 
         # uniq! (bang) returns nil if no changes are made
@@ -217,7 +218,7 @@ class InformationController < ApplicationController
 
 private    
     def set_movieinfo_params
-        params.require(:movieinfo).permit(:moviename, :image)
+        params.require(:movieinfo).permit(:moviename, :image, :clip)
     end
 
     def information_params

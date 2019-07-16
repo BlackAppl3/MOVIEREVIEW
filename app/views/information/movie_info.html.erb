@@ -2,14 +2,13 @@
     function clickfunction(movieno){
         var opt = document.getElementById("rating").value
         var movieno = document.getElementById("hidden-para").innerHTML
-        movieno = movieno.replace(/%20/g, " ");
-        console.log(movieno)
-        
+        movieno = movieno.replace(/%20/g, "");
+
         /* const urlParams = new URLSearchParams(window.location.search);
         # const myParam = urlParams.get("");
         # console.log(myParam) */
         
-       window.location.href = "/information/movie_info/"+movieno+"?filter=true&rating_val="+opt+""; 
+       window.location.href = `/information/movie_info/${movieno.trim()}?filter=true&rating_val=${opt.trim()}`; 
 
 
     }
@@ -25,7 +24,9 @@
 
 <marquee> All Reviews. Hey root you can also warn and ban the users who does bad comment  :) </marquee>
 
-<center>   <% if params.has_key?(:rating_val) == false %> 
+<center>   
+        <% if @hash.any? == true %>
+            <% if params.has_key?(:rating_val) == false %> 
                <%= link_to("Highest rating first", {
                    "controller": "information",
                    "action": "movie_info",
@@ -39,7 +40,10 @@
                    "order": "low"
                 }, class: "btn btn-success") %> 
            <% end %>
-     <%= select_tag "rating", options_for_select(@hash.collect{|u| [u[1], u[0]]}), class: "btn btn-success", :onclick => "clickfunction()" %> 
+
+           
+            <%= select_tag "rating", options_for_select(@hash.collect{|u| [u[1], u[0]]}, :selected => params[:rating_val] ), class: "btn btn-success", :onclick => "clickfunction()" %> 
+        <% end %>    
 </center>
 
 <p id = "hidden-para" hidden> <%= params[:id] %> </p>
