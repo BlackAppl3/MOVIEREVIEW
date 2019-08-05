@@ -16,7 +16,10 @@ Rails.application.routes.draw do
   get 'information/delete_movie' => "information#delete_movie"
   post 'information/edit_movie/:id' => "information#edit_movie"
   post 'contacts/request_result' => "contacts#request_result"
-  resources :information
+  post 'contacts/comment' => "contacts#comment"
+  get 'contacts/comment' => "contacts#comment"
+  get 'contacts/add_like' => "contacts#add_like"
+  resources :information 
   resources :contacts
   resources :users, only: [:index, :create]
   resources :sessions, only: [:create]

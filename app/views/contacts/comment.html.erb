@@ -1,0 +1,23 @@
+<p> Post your comments Here </p>
+
+<%= form_for @comment, :url => {:controller => "contacts", :action => "comment", :post_comment => "true"}, :html => {:class => "form-horizontal center"} do |f| %>
+     <div class="form-group">
+           <%= f.label :comment, class: "col-md-5 control-label" %>
+               <div class="col-md-3">
+                   <%= f.text_field :comment,  class: "form-control" %>
+               </div>   
+     </div>
+    <center> <%= f.submit "Submit", class: "btn btn-success" %> </center>
+<% end %>
+
+<br/> <center> Audience Comments </center> </p>
+
+<%@comments.each do |val|%>
+   <center> <%= val.comment %> 
+   <%= link_to("Like", {
+       "controller": "contacts",
+       "action": "add_like",
+       "id": val.id
+   }, class: "btn btn-success") %>
+   <%= val.likes %> </center>
+<% end %>

@@ -6,7 +6,7 @@
 
 <br/>
 
-<center> <%= link_to("Check Root Response", {"controller": "contacts", "action": "new", "id": 1}, class: "btn btn-success") %> <%= link_to("Contact Admin", {"controller": "contacts", "action": "new", "id": 2}, class: "btn btn-success") %> </center>
+<center> <%= link_to("Check Root Response", {"controller": "contacts", "action": "new", "id": 1}, class: "btn btn-success") %> <%= link_to("Contact Admin", {"controller": "contacts", "action": "new", "id": 2}, class: "btn btn-success") %> <%= link_to("Comment", {"controller": "contacts", "action": "comment", "id": 3}, class: "btn btn-success") %> </center>
 <br/>
 
 <% if params[:id] == "2" %>
@@ -45,4 +45,9 @@
         <center> <%= f.submit class: "btn btn-success"  %> </center>
 
    <% end %>
+<% end %>
+
+
+<% if params[:id] == "3" %>
+  
 <% end %>
